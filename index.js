@@ -85,5 +85,4 @@ class Calendar {
         return new Date(date.getTime() - diff).getTime(); // needs to substract
       }
   }
-  console.log(new Calendar(1401,'persian'))
 export default Calendar

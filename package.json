@@ -2,14 +2,14 @@
   "name": "universal-calendar-js",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/dist.main.js",
   "scripts": {
     "build": "uglifyjs index.js -o ./dist/dist.main.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
+  "license": "MIT",
+  "devDependencies": {
     "uglify-js": "^3.17.4"
   }
 }
