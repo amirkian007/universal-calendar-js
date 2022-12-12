@@ -1,16 +1,15 @@
 class Calendar {
-    constructor(year,calendar) {
-      this.globalCalander = {},
-      this.timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
-      this.formatter = new Intl.DateTimeFormat('en-US',{
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
-        calendar: calendar,
-        locale:"en-US",
-        numberingSystem:"latn",
-       });
-       this.getCalanderFromYear(year)
+    constructor(calendar = 'gregory', year = new Date().getFullYear(), locale = 'en-US') {
+        this.globalCalander = {},
+            this.timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+        this.formatter = new Intl.DateTimeFormat(locale, {
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric',
+            calendar: calendar,
+            numberingSystem: 'latn'
+        });
+        this.getCalanderFromYear(year)
     }
     destructParts(parts) {
         let res = {}
@@ -59,30 +58,29 @@ class Calendar {
             if (targetYear < formatedYearNow) {
                 diff = 86400000 * 365 * (formatedYearNow - targetYear)
                 targetInMillisec = new Date().getTime() - diff
-            }else{
-                diff = 86400000 * 365 * (targetYear - formatedYearNow )
+            } else {
+                diff = 86400000 * 365 * (targetYear - formatedYearNow)
                 targetInMillisec = new Date().getTime() + diff
             }
             const delta = 356
-            for(let i=2;i<10;i++){
+            for (let i = 2; i < 10; i++) {
                 const formatedTarget = Number(this.destructParts(this.formatter.formatToParts(new Date(targetInMillisec))).year)
                 if (formatedTarget === targetYear) break
                 if (formatedTarget > targetYear) {
-                    targetInMillisec = targetInMillisec - 86400000 * delta / i
+                    targetInMillisec = targetInMillisec - 86400000 *(delta / i)
                 } else if (formatedTarget < targetYear) {
-                    targetInMillisec = targetInMillisec + 86400000 * delta / i
+                    targetInMillisec = targetInMillisec + 86400000 *(delta / i)
                 }
             }
             this.clacAfter(targetInMillisec)
             this.clacBefore(targetInMillisec)
         }
     }
-    changeTimezone(date) {
-        var invdate = new Date(date.toLocaleString('en-US', {
-          timeZone: this.timeZone
-        }));
-        var diff = date.getTime() - invdate.getTime();
-        return new Date(date.getTime() - diff).getTime(); // needs to substract
-      }
-  }
+    getSupportedCalander() {
+        return Intl.supportedValuesOf('calendar')
+    }
+}
+console.time()
+console.log(new Calendar('persian',1302))
+console.timeEnd()
 export default Calendar
