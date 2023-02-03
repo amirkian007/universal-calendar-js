@@ -4,12 +4,14 @@
   "description": "",
   "main": "./dist/dist.main.js",
   "scripts": {
-    "build": "uglifyjs index.js -o ./dist/dist.main.js"
+    "build": "uglifyjs index.js -o ./dist/dist.main.js",
+    "dev": "vite"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "uglify-js": "^3.17.4"
+    "uglify-js": "^3.17.4",
+    "vite": "^4.0.4"
   }
 }
