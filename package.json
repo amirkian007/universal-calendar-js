@@ -2,15 +2,23 @@
   "name": "universal-calendar-js",
   "version": "1.0.0",
   "description": "",
-  "main": "./dist/dist.main.js",
+  "main": "dist/dist.main.js",
+  "module": "dist/dist.main.mjs",
+  "exports": {
+    "import": "dist/dist.main.mjs",
+    "require": "dist/dist.main.js"
+  },
   "scripts": {
-    "build": "uglifyjs index.js -o ./dist/dist.main.js",
+    "build": "uglifyjs Calendar.js --compress --mangle --output ./dist/dist.main.mjs --comments all && npx babel ./Calendar.js --out-file ./dist/dist.main.js",
     "dev": "vite"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@babel/cli": "^7.20.7",
+    "@babel/core": "^7.20.12",
+    "@babel/preset-env": "^7.20.2",
     "uglify-js": "^3.17.4",
     "vite": "^4.0.4"
   }
