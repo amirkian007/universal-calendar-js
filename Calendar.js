@@ -1,5 +1,10 @@
 class Calendar {
     #formatter;
+    /**
+    * constructor to create a calendar.
+    * @param {Array} calendar calendar type to generate dafaults to gregory.
+    * @param {Array} years years to generate a calendar for - defaults to current year.
+    */
     constructor(calendar = 'gregory', years = []) {
         this.globalCalendar = {};
         this.timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -10,8 +15,8 @@ class Calendar {
             calendar: calendar,
             numberingSystem: 'latn'
         });
-        if(years.length ===0){
-            years.push(this.getCurrentDateObject().year)
+        if (years.length === 0) {
+            years.push(this.getCurrentDate().year)
         }
         for (let i = 0; i < years.length; i++) {
             this.#getCalendarForYear(years[i]);
@@ -66,7 +71,7 @@ class Calendar {
             // initialize year, month, and day in the globalCalendar object if they don't exist
             this.globalCalendar[dateParts.year] = this.globalCalendar[dateParts.year] || {};
             this.globalCalendar[dateParts.year][dateParts.month] = this.globalCalendar[dateParts.year][dateParts.month] || {};
-            this.globalCalendar[dateParts.year][dateParts.month][dateParts.day] =  new Date(currentDate).getTime();
+            this.globalCalendar[dateParts.year][dateParts.month][dateParts.day] = {...dateParts,...{timestamp : new Date(currentDate).getTime()}};
             currentDate.setDate(currentDate.getDate() - 1);
         }
     }
@@ -102,8 +107,6 @@ class Calendar {
             const delta = 356;
             for (let i = 2; i < 10; i++) {
                 // Get the year as a number from the date in milliseconds
-                console.log(targetInMilliseconds)
-                console.log(this.#formatter.formatToParts(new Date(targetInMilliseconds)))
                 const yearInMilliseconds = Number(this.#destructParts(this.#formatter.formatToParts(new Date(targetInMilliseconds))).year);
                 // Check if the year in milliseconds is equal to the target year
                 if (yearInMilliseconds === targetYear) {
@@ -123,29 +126,56 @@ class Calendar {
             this.#calculateBefore(targetInMilliseconds);
         }
     }
-
-    getCurrentDateObject(){
+    /**
+     * function to get the cuurent date object.
+     * @returns {Object} An object with year, month, and day properties.
+     */
+    getCurrentDate() {
         return this.#destructParts(this.#formatter.formatToParts(new Date()))
     }
-
-    getSupportedCalanders() {
-        return Intl.supportedValuesOf('calendar')
+    /**
+    * function to get the calendar of a year.
+    * @param {number} year The year time to return the calendar.
+    * @returns {Object} An object with year, month, and day properties.
+    */
+    getCalendarForYear(year) {
+        return this.globalCalendar[year] ?? {}
     }
-
-    getYearCalendar(year){
-      return this.globalCalendar[year] ?? {}
-    }
-    getMonthOFAYear(year,month){
-        if(!this.globalCalendar[year]) return {}
+    /**
+    * function to get the calendar of a month of a year.
+    * @param {number} year The year time to return the calendar.
+    * @param {number} month The month time to return the calendar.
+    * @returns {Object} An object month, and day properties.
+    */
+    getCalendarOfMonth(year, month) {
+        if (!this.globalCalendar[year]) return {}
         return this.globalCalendar[year][month] ?? {}
     }
-    getDateOfaYear(year,month,day){
-        if(!this.globalCalendar[year]) return {}
-        if(!this.globalCalendar[year][month]) return {}
+    /**
+     * function to get the utc time of a day in a calendar.
+     * @param {number} year The year time to return the date.
+     * @param {number} month The month time to return the date.
+     * @param {number} day The day time to return the date.
+     * @returns {number} utc timestamp of the date in the calnedar.
+     */
+    getDateUTC(year, month, day) {
+        if (!this.globalCalendar[year]) return {}
+        if (!this.globalCalendar[year][month]) return {}
         return this.globalCalendar[year][month][day] ?? {}
     }
-    addYear(year){
+    /**
+        * generate a calendar for a year and add it to the calendar object.
+        * @param {number} year The year time to generate.
+        */
+    generateYear(year) {
         this.getCalendarForYear(year)
+    }
+    /**
+     * get list of supported calendars.
+     * @returns {Array} list of supported calendars.
+     */
+    getSupportedCalanders() {
+        return Intl.supportedValuesOf('calendar')
     }
 }
 

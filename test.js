@@ -1,3 +1,6 @@
-import Calendar from "./index"
+import Calendar from "./Calendar"
 
-console.log(Calendar)
+const calendar = new Calendar('persian',)
+
+console.log(calendar.globalCalendar)
+console.log(calendar.getCurrentDate())
