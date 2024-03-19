@@ -4,6 +4,7 @@
   "description": "",
   "main": "dist/dist.main.js",
   "module": "dist/dist.main.mjs",
+  "type": "module",
   "exports": {
     "import": "dist/dist.main.mjs",
     "require": "dist/dist.main.js"

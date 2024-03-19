@@ -1,3 +1,7 @@
+/**
+ * Represents a calendar.
+ * @class
+ */
 class Calendar {
     #formatter;
     /**
@@ -12,7 +16,7 @@ class Calendar {
             year: 'numeric',
             month: 'numeric',
             day: 'numeric',
-            calendar: calendar,
+            calendar,
             numberingSystem: 'latn'
         });
         if (years.length === 0) {
@@ -34,12 +38,13 @@ class Calendar {
                 result[parts[i].type] = parts[i].value;
             }
         }
+        console.log(result)
         return result;
     }
     /**
-      * Calculates dates after a start time.
-      * @param {Date} startTime The start time to calculate from (defaults to current date).
-      */
+     * Calculates dates after a start time.
+     * @param {Date} startTime The start time to calculate from (defaults to current date).
+     */
     #calculateAfter(startTime = new Date()) {
         let currentTime = new Date(startTime).setHours(0, 0, 0, 0);
         let year = this.#destructParts(this.#formatter.formatToParts(currentTime)).year;

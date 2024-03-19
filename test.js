@@ -1,6 +1,7 @@
-import Calendar from "./Calendar"
+import Calendar from "./Calendar.js"
 
-const calendar = new Calendar('persian',)
-
-console.log(calendar.globalCalendar)
-console.log(calendar.getCurrentDate())
+const calendar = new Calendar('persian',[1380,1379])
+console.time('generated in :')
+console.log(calendar)
+console.timeEnd('generated in :')
+ 
