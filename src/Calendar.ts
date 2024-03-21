@@ -1,67 +1,114 @@
-import { CalendarCalulator } from "./CalendarCalculator";
+import { CalendarCalculator } from "./CalendarCalculator";
+import { numberMap } from "./NumberMao";
 
-class Calendar extends CalendarCalulator {
-  private selectedYears: Array<string | number>;
+class Calendar extends CalendarCalculator {
+  private selectedYears: Array<number>;
 
   /**
-   * constructor to create a calendar.
+   * Creates an instance of Calendar.
+   * @param {Intl.DateTimeFormatOptions["calendar"]} [calendar="gregory"] - The calendar type to use. Default is "gregory".
+   * @param {Array<string | number>} [years=[]] - The years to generate the calendar for. Default is an empty array.
    */
   constructor(
     calendar: Intl.DateTimeFormatOptions["calendar"] = "gregory",
     years: Array<string | number> = []
   ) {
     super(calendar);
-    this.selectedYears = years;
+    this.selectedYears = numberMap(years);
 
     if (years.length === 0) {
-      this.selectedYears.push(this.getCurrentYear());
+      this.selectedYears.push(+this.getCurrentYear());
     }
     this.generateSelectedYearsCalendar();
   }
 
   /**
-   * generate calendar for the selected years
+   * Generates calendar for the selected years.
+   * @private
    */
   private generateSelectedYearsCalendar() {
     for (let i = 0; i < this.selectedYears.length; i++) {
       this.generateCllendarForAyear(this.selectedYears[i]);
     }
   }
-  private checkYearAvalibality(year: string) {
-    if (!this.globalCalendar[year]) {
+  /**
+   * Checks if the calendar data for a year is available, generates if not.
+   * @param {string | number} year - The year to check.
+   * @private
+   */
+  private checkYearAvalibality(year: string | number) {
+    console.log("checkYearAvalibality : ", year, !!this.globalCalendar[year]);
+
+    if (!this.selectedYears.includes(+year)) {
       this.generateCllendarForAyear(year);
+      this.selectedYears.push(+year);
     }
   }
   /**
-   * get calendar data for a month.
+   * Retrieves calendar data for a year.
+   * @param {string} [year='currentYear'] - The year to retrieve calendar data for.
+   * @returns {object} - Calendar data for the specified year.
    */
-  public getYearCalendar(year: string) {
+  public getYearCalendar(year: string = this.getCalendarCurrentYear()) {
     this.checkYearAvalibality(year);
     return this.globalCalendar[year];
   }
-  public getMonthCalendar(year: string, month: string) {
+  /**
+   * Retrieves calendar data for a month.
+   * @param {string} [year='currentYear'] - The year of the month.
+   * @param {string} [month='currentMonth'] - The month to retrieve calendar data for.
+   * @returns {object} - Calendar data for the specified month.
+   */
+  public getMonthCalendar(year: string = this.getCurrentYear() , month: string = this.getCurrentMonth()) {
     return this.getYearCalendar(year)[month];
   }
   /**
-   * get calendar data for a month.
+   * Retrieves calendar data for a date.
+   * @param {string} [year='currentYear'] - The year of the date.
+   * @param {string} [month='currentMonth'] - The month of the date.
+   * @param {string} [day='currentDay'] - The day to retrieve calendar data for.
+   * @returns {object} - Calendar data for the specified date.
    */
-  public getDate(year: string, month: string, day: string) {
+  public getDate(year: string = this.getCurrentYear(), month: string = this.getCurrentMonth(), day: string = this.getCurrentDay()) {
     return this.getMonthCalendar(year, month)[day];
   }
   /**
-   * get date data for a date.
+   * Adds a year to the selected years and generates its calendar data.
+   * @param {string | number} [year='currentYear'] - The year to add.
    */
-  public addYear(year: string | number) {
-    this.selectedYears.push(year)
-    this.generateCllendarForAyear(year);
+  public addYear(year: string | number = this.getCurrentYear()) {
+    this.checkYearAvalibality(year);
   }
   /**
-   * get supported calendars.
+   * Retrieves supported calendars.
+   * @returns {Array<string>} - An array of supported calendar types.
    */
   public getSupportedCalanders() {
     //@ts-ignore
     return Intl.supportedValuesOf("calendar");
   }
+  /**
+   * eturns current year calenar for a the selected calendar.
+   * @returns {string} - the year in string.
+   */
+  public getCalendarCurrentYear() {
+    return this.getCurrentYear();
+  }
+  /**
+   * eturns current month calenar for a the selected calendar.
+   * @returns {string} - the year in string.
+   */
+  public getCalendarCurrentMonth() {
+    return this.getCurrentMonth();
+  }
+  /**
+   * eturns current dat calenar for a the selected calendar.
+   * @returns {string} - the year in string.
+   */
+  public getCalendarCurrentDay() {
+    return this.getCurrentDay();
+  }
+
 }
 
 export default Calendar;
