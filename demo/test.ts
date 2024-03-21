@@ -1,4 +1,4 @@
-import {Calendar} from "./src/index"
+import {Calendar} from "../src/index"
 
 
 const persianCalendar = new Calendar("persian");

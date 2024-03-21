@@ -31,7 +31,7 @@
   },
   "scripts": {
     "build": "tsup src/index.ts --dts",
-    "dev": "vite"
+    "dev": "vite ./demo"
   },
   "devDependencies": {
     "tsup": "^8.0.2",
