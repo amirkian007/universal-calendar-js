@@ -14,11 +14,11 @@ supported calendars :
 
 ## installation
 ```
-npm i universal-calendar
+npm i universal-calendar-js
 ```
 or
 ```
-pnpm i universal-calendar
+pnpm i universal-calendar-js
 ```
 ## Example usage
 
