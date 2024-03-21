@@ -16,7 +16,9 @@ export default class CalendarFormater {
   }
 
   destructIntParts(timeStamp: Date = new Date()) {
+
     const parts = this.formatHandeler.formatToParts(timeStamp);
+    
     let result: any = {
       day: "",
       era: "",
