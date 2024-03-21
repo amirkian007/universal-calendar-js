@@ -1,13 +1,15 @@
 import { CalendarCalulator } from "./CalendarCalculator";
 
 class Calendar extends CalendarCalulator {
-
-  private readonly selectedYears: Array<string | number>;
+  private selectedYears: Array<string | number>;
 
   /**
    * constructor to create a calendar.
    */
-  constructor(calendar = "gregory", years: Array<string | number> = []) {
+  constructor(
+    calendar: Intl.DateTimeFormatOptions["calendar"] = "gregory",
+    years: Array<string | number> = []
+  ) {
     super(calendar);
     this.selectedYears = years;
 
@@ -25,7 +27,7 @@ class Calendar extends CalendarCalulator {
       this.generateCllendarForAyear(this.selectedYears[i]);
     }
   }
-  private checkYearAvalibality(year:string){
+  private checkYearAvalibality(year: string) {
     if (!this.globalCalendar[year]) {
       this.generateCllendarForAyear(year);
     }
@@ -34,24 +36,23 @@ class Calendar extends CalendarCalulator {
    * get calendar data for a month.
    */
   public getYearCalendar(year: string) {
-    this.checkYearAvalibality(year)
+    this.checkYearAvalibality(year);
     return this.globalCalendar[year];
   }
   public getMonthCalendar(year: string, month: string) {
-    this.checkYearAvalibality(year)
-    return this.globalCalendar[year][month];
+    return this.getYearCalendar(year)[month];
   }
   /**
    * get calendar data for a month.
    */
   public getDate(year: string, month: string, day: string) {
-    this.checkYearAvalibality(year)
     return this.getMonthCalendar(year, month)[day];
   }
   /**
    * get date data for a date.
    */
-  public addYear(year: string) {
+  public addYear(year: string | number) {
+    this.selectedYears.push(year)
     this.generateCllendarForAyear(year);
   }
   /**

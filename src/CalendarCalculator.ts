@@ -4,7 +4,7 @@ import CalendarFormater from "./Formater";
 export class CalendarCalulator extends CalendarFormater {
   protected readonly globalCalendar: CalendarCollection = new CalendarCollection();
 
-  constructor(calendar: string) {
+  constructor(calendar: Intl.DateTimeFormatOptions['calendar']) {
     super(calendar);
   }
   /**

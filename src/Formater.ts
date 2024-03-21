@@ -1,5 +1,6 @@
 export default class CalendarFormater {
-  static formatingOptions: any = {
+    
+  private static _formatingOptionsInit: Intl.DateTimeFormatOptions = {
     year: "numeric",
     month: "numeric",
     day: "numeric",
@@ -8,9 +9,9 @@ export default class CalendarFormater {
   };
   formatHandeler: Intl.DateTimeFormat;
 
-  constructor(calendar: string) {
+  constructor(calendar: Intl.DateTimeFormatOptions['calendar']) {
     this.formatHandeler = new Intl.DateTimeFormat("en-US", {
-      ...CalendarFormater.formatingOptions,
+      ...CalendarFormater._formatingOptionsInit,
       ...{ calendar },
     });
   }
@@ -18,14 +19,14 @@ export default class CalendarFormater {
   destructIntParts(timeStamp: Date = new Date()) {
 
     const parts = this.formatHandeler.formatToParts(timeStamp);
-    
-    let result: any = {
+
+    let result = {
       day: "",
       era: "",
       month: "",
       timestamp: timeStamp,
       year: "",
-    };
+    } as any
 
     for (let i = 0; i < parts.length; i++) {
       if (parts[i].type !== "literal") {

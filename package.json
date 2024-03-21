@@ -10,7 +10,7 @@
     "require": "dist/dist.main.js"
   },
   "scripts": {
-    "build": "uglifyjs Calendar.js --compress --mangle --output ./dist/dist.main.mjs --comments all && npx babel ./Calendar.js --out-file ./dist/dist.main.js",
+    "build": "tsup src/index.ts --dts",
     "dev": "vite"
   },
   "keywords": [],
@@ -20,6 +20,8 @@
     "@babel/cli": "^7.20.7",
     "@babel/core": "^7.20.12",
     "@babel/preset-env": "^7.20.2",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.3",
     "uglify-js": "^3.17.4",
     "vite": "^4.0.4"
   }

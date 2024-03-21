@@ -1,5 +1,5 @@
 export default class CalendarCollection {
-    [key: string] : any
+    [key: string] : CalendarCollection | any
 
     constructor() {
          
