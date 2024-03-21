@@ -59,7 +59,10 @@ class Calendar extends CalendarCalculator {
    * @param {string} [month='currentMonth'] - The month to retrieve calendar data for.
    * @returns {object} - Calendar data for the specified month.
    */
-  public getMonthCalendar(year: string = this.getCurrentYear() , month: string = this.getCurrentMonth()) {
+  public getMonthCalendar(
+    year: string = this.getCurrentYear(),
+    month: string = this.getCurrentMonth()
+  ) {
     return this.getYearCalendar(year)[month];
   }
   /**
@@ -69,7 +72,11 @@ class Calendar extends CalendarCalculator {
    * @param {string} [day='currentDay'] - The day to retrieve calendar data for.
    * @returns {object} - Calendar data for the specified date.
    */
-  public getDate(year: string = this.getCurrentYear(), month: string = this.getCurrentMonth(), day: string = this.getCurrentDay()) {
+  public getDate(
+    year: string = this.getCurrentYear(),
+    month: string = this.getCurrentMonth(),
+    day: string = this.getCurrentDay()
+  ) {
     return this.getMonthCalendar(year, month)[day];
   }
   /**
@@ -80,6 +87,27 @@ class Calendar extends CalendarCalculator {
     this.checkYearAvalibality(year);
   }
   /**
+   * returns current year calenar for a the selected calendar.
+   * @returns {string} - the year in string.
+   */
+  public getCalendarCurrentYear() {
+    return this.getCurrentYear();
+  }
+  /**
+   * returns current month calenar for a the selected calendar.
+   * @returns {string} - the year in string.
+   */
+  public getCalendarCurrentMonth() {
+    return this.getCurrentMonth();
+  }
+  /**
+   * returns current dat calenar for a the selected calendar.
+   * @returns {string} - the year in string.
+   */
+  public getCalendarCurrentDay() {
+    return this.getCurrentDay();
+  }
+  /**
    * Retrieves supported calendars.
    * @returns {Array<string>} - An array of supported calendar types.
    */
@@ -87,28 +115,6 @@ class Calendar extends CalendarCalculator {
     //@ts-ignore
     return Intl.supportedValuesOf("calendar");
   }
-  /**
-   * eturns current year calenar for a the selected calendar.
-   * @returns {string} - the year in string.
-   */
-  public getCalendarCurrentYear() {
-    return this.getCurrentYear();
-  }
-  /**
-   * eturns current month calenar for a the selected calendar.
-   * @returns {string} - the year in string.
-   */
-  public getCalendarCurrentMonth() {
-    return this.getCurrentMonth();
-  }
-  /**
-   * eturns current dat calenar for a the selected calendar.
-   * @returns {string} - the year in string.
-   */
-  public getCalendarCurrentDay() {
-    return this.getCurrentDay();
-  }
-
 }
 
 export default Calendar;

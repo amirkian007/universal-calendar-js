@@ -11,7 +11,7 @@ supported calendars :
 - [Class: Calendar](#class-calendar)
   - [Constructor](#constructor)
   - [Methods](#methods)
- 
+
 ## installation
 ```
 npm i universal-calendar
@@ -57,10 +57,10 @@ const calendarDataYear1380 = persianCalendar.getYearCalendar('1380');
 // Get calendar data for Mordad  1380
 const mordadData = persianCalendar.getMonthCalendar('1380', '5');
 
-// Get calendar data for January 18th, 2024
+// Get calendar data for Mordad 18th, 2024
 const mordad18ThData = persianCalendar.getDate('1380', '5', '18');
 
-// return current date in the selected calendar .
+// return current date in the selected calendar. in this case persian calendar
 const mordad18ThData = persianCalendar.getDate(); // currently 1403-1-2
 
 // Add year 1395 to the selected years
@@ -76,7 +76,7 @@ calendar.getCalendarCurrentMonth();// currently 1
 
 calendar.getCalendarCurrentDay();// currently 2
 
-// Retrieve supported calendars
+// Retrieve list supported calendars
 const supportedCalendars = calendar.getSupportedCalendars();
 ```
 
@@ -94,35 +94,31 @@ Creates an instance of Calendar.
 ### Methods
 
 #### `getYearCalendar(year: string = 'current') → object`
+- `year`: The year to retrieve calendar data for. defaults to current year in the selected calendar.
 
 Retrieves calendar data for a year.defaults to current year.
 
-- `year`: The year to retrieve calendar data for. defaults to current year in the selected calendar.
 
 #### `getMonthCalendar(year: string  = 'current', month: string  = 'current') → object`
-
-Retrieves calendar data for a month. defaults to current month.
-
 - `year`: The year of the month.
 - `month`: The month to retrieve calendar data for.
 
+Retrieves calendar data for a month. defaults to current month.
+
+
 #### `getDate(year: string = 'current', month: string = 'current', day: string = 'current') → object`
+- `year`: The year of the date. 
+- `month`: The month of the date.  
+- `day`: The day to retrieve calendar data for.
 
 Retrieves calendar data for a date. defaults to current date.
 
-- `year`: The year of the date.
-- `month`: The month of the date.
-- `day`: The day to retrieve calendar data for.
 
 #### `addYear(year: string | number = 'current')`
+- `year`: The year to add.
 
 Adds a year to the selected years and generates its calendar data. defaults to current year.
 
-- `year`: The year to add.
-
-#### `getSupportedCalendars() → Array<string>`
-
-Retrieves supported calendars.
 
 #### `getCalendarcurrent() → string`
 
@@ -135,3 +131,7 @@ returns current month calenar for a the selected calendar
 #### `getCalendarCurrentDay() → string`
 
 returns current day calenar for a the selected calendar
+
+#### `getSupportedCalendars() → Array<string>`
+
+Retrieves supported calendars.
