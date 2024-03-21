@@ -1,28 +1,41 @@
 {
   "name": "universal-calendar-js",
-  "version": "1.0.0",
-  "description": "",
-  "main": "dist/dist.main.js",
-  "module": "dist/dist.main.mjs",
+  "version": "0.0.3",
+  "description": "A grid",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "keywords": [
+    "grid",
+    "calendar",
+    "calendar drag n drop"
+  ],
+  "author": "Amirkian Adl <amircc1200@gmail.com>",
+  "homepage": "https://github.com/amirkian007/universal-calendar-js#readme",
+  "license": "MIT",
   "type": "module",
-  "exports": {
-    "import": "dist/dist.main.mjs",
-    "require": "dist/dist.main.js"
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amirkian007/universal-calendar-js.git",
+    "directory": "packages/shared-grid"
+  },
+  "bugs": {
+    "url": "https://github.com/amirkian007/universal-calendar-js/issues"
   },
   "scripts": {
     "build": "tsup src/index.ts --dts",
     "dev": "vite"
   },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "^7.20.7",
-    "@babel/core": "^7.20.12",
-    "@babel/preset-env": "^7.20.2",
     "tsup": "^8.0.2",
     "typescript": "^5.4.3",
-    "uglify-js": "^3.17.4",
     "vite": "^4.0.4"
   }
 }
