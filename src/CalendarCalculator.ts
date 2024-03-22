@@ -36,23 +36,18 @@ export class CalendarCalculator extends CalendarFormater {
      * @protected
      */
     protected generateCllendarForAyear(targetYear: string | number) {
-      // Convert year to a number
+
       targetYear = Number(targetYear);
-    
-      // Get the current year as a number
       const currentYear = Number(this.getCurrentYear());
     
       if (targetYear === currentYear) {
-        // If the target year is the current year, calculate both calcAfter and calcBefore
         this.generateCurrentYear();
         return;
       }
     
-      // Calculate the time difference in milliseconds
       const timeDifference = 86400000 * 365 * Math.abs(currentYear - targetYear);
       const targetInMilliseconds = targetYear < currentYear ? new Date().getTime() - timeDifference : new Date().getTime() + timeDifference;
     
-      // Calculate calcAfter and calcBefore with the target date in milliseconds
       this.calculateDates('after', targetInMilliseconds);
       this.calculateDates('before', targetInMilliseconds);
     }

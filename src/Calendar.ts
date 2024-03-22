@@ -37,8 +37,6 @@ class Calendar extends CalendarCalculator {
    * @private
    */
   private checkYearAvalibality(year: string | number) {
-    console.log("checkYearAvalibality : ", year, !!this.globalCalendar[year]);
-
     if (!this.selectedYears.includes(+year)) {
       this.generateCllendarForAyear(year);
       this.selectedYears.push(+year);
