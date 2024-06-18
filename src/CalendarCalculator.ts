@@ -25,7 +25,7 @@ export class CalendarCalculator extends CalendarFormater {
      * Generates calendar for the current year.
      * @private
      */
-    private generateCurrentYear() {
+    private calculateCurrentYear() {
       this.calculateDates('before');
       this.calculateDates('after');
     }
@@ -35,13 +35,13 @@ export class CalendarCalculator extends CalendarFormater {
      * @param {string | number} targetYear - The year for which to generate the calendar.
      * @protected
      */
-    protected generateCllendarForAyear(targetYear: string | number) {
+    protected calculateCalendarForAyear(targetYear: string | number) {
 
       targetYear = Number(targetYear);
       const currentYear = Number(this.getCurrentYear());
     
       if (targetYear === currentYear) {
-        this.generateCurrentYear();
+        this.calculateCurrentYear();
         return;
       }
     

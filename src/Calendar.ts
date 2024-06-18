@@ -1,5 +1,5 @@
 import { CalendarCalculator } from "./CalendarCalculator";
-import { numberMap } from "./NumberMao";
+import { numberMap } from "./NumberMap";
 
 class Calendar extends CalendarCalculator {
   private selectedYears: Array<number>;
@@ -28,7 +28,7 @@ class Calendar extends CalendarCalculator {
    */
   private generateSelectedYearsCalendar() {
     for (let i = 0; i < this.selectedYears.length; i++) {
-      this.generateCllendarForAyear(this.selectedYears[i]);
+      this.calculateCalendarForAyear(this.selectedYears[i]);
     }
   }
   /**
@@ -38,7 +38,7 @@ class Calendar extends CalendarCalculator {
    */
   private checkYearAvalibality(year: string | number) {
     if (!this.selectedYears.includes(+year)) {
-      this.generateCllendarForAyear(year);
+      this.calculateCalendarForAyear(year);
       this.selectedYears.push(+year);
     }
   }
